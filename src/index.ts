@@ -69,7 +69,7 @@ const getAirbnbConfigs = (base?: boolean) => {
 
 const commonRules: Linter.RulesRecord = {
   '@typescript-eslint/ban-ts-comment': [1],
-  complexity: ['error', 5],
+  complexity: ['error', 4],
   curly: ['error', 'all'],
   'function-call-argument-newline': ['error', 'always'],
   'import/no-cycle': [0],

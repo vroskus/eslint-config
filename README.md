@@ -1,31 +1,32 @@
-# @vroskus/config-web
+# @vroskus/eslint-config
 
-Tool for preparing config.js file. It consumes process.env.<PARAM> and produces .js file with values.
+Eslint config to make code proper
 
 ## Installation
 
 Call:
 
-`npm install -D @vroskus/config-web`
+`npm install -D @vroskus/eslint-config`
 
-`yarn add -D @vroskus/config-web`
+`yarn add -D @vroskus/eslint-config`
 
 ## Usage
 
-Just run ```config-web <input file path> <output file path>```
-
-Input file format:
 ```
-const params: Array<keyof $Config> = [
-  'PARAM',
-  ...
+import eslintConfig from '@vroskus/eslint-config';
+
+/* eslintConfig.browser() for dom, eslintConfig.node() for node */
+const config = eslintConfig.<browser | node>({
+  configs: /* array of additional configs */
+  rules: /* object of additional rules */ 
+});
+
+export default [
+  ...config,
+  {
+    /*... */
+  },
+  // ...
 ];
-```
 
-Output file ormat:
-```
-var config = {
-  PARAM: "VALUE", 
-  ...
-};
 ```

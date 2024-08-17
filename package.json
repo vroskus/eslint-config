@@ -24,6 +24,7 @@
     "@eslint/compat": "^1.1.1",
     "@eslint/eslintrc": "^3.1.0",
     "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-problems": "^8.0.0",
@@ -35,13 +36,13 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-sonarjs": "^1.0.4",
+    "globals": "^15.9.0",
     "typescript": "^5.5.4",
     "typescript-eslint": "^8.0.1"
   },
   "devDependencies": {
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.4.0",
-    "eslint": "^9.9.0"
+    "@types/node": "^22.4.0"
   },
   "bugs": {
     "url": "https://github.com/vroskus/eslint-config/issues"

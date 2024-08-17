@@ -35,21 +35,18 @@
     "eslint-plugin-react": "^7.35.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-sonarjs": "^1.0.4",
-    "typescript-eslint": "^8.0.1"
+    "typescript-eslint": "^8.0.1",
+    "typescript": "^5.5.4"
   },
   "devDependencies": {
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^22.3.0",
-    "eslint": "^9.9.0",
-    "typescript": "*"
+    "eslint": "^9.9.0"
   },
   "bugs": {
     "url": "https://github.com/vroskus/eslint-config/issues"
   },
   "homepage": "https://github.com/vroskus/eslint-config#readme",
   "main": "dist/index.js",
-  "types": "dist/index.d.js",
-  "peerDependencies": {
-    "typescript": "^5.5.4"
-  }
+  "types": "dist/index.d.js"
 }

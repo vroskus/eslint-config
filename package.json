@@ -41,12 +41,15 @@
     "@types/eslint__js": "^8.42.3",
     "@types/node": "^22.3.0",
     "eslint": "^9.9.0",
-    "typescript": "^5.3.3"
+    "typescript": "*"
   },
   "bugs": {
     "url": "https://github.com/vroskus/eslint-config/issues"
   },
   "homepage": "https://github.com/vroskus/eslint-config#readme",
   "main": "dist/index.js",
-  "types": "dist/index.d.js"
+  "types": "dist/index.d.js",
+  "peerDependencies": {
+    "typescript": "^5.5.4"
+  }
 }

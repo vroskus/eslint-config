@@ -68,6 +68,12 @@ const getAirbnbConfigs = (base?: boolean) => {
   ];
 }
 
+const commonPlugins = {
+  '@stylistic/ts': stylisticTsPlugin,
+  'import': importPlugin,
+  'import-newlines': importNewlinesPlugin,
+};
+
 const commonRules: Linter.RulesRecord = {
   '@typescript-eslint/ban-ts-comment': [1],
   complexity: ['error', 4],
@@ -121,12 +127,6 @@ const commonRules: Linter.RulesRecord = {
   }],
   'sonarjs/no-small-switch': [0],
   'sonarjs/prefer-single-boolean-return': [0],
-};
-
-const commonPlugins = {
-  'import-newlines': importNewlinesPlugin,
-  importPlugin,
-  stylisticTsPlugin,
 };
 
 const nodeConfig = (params: {
@@ -201,6 +201,17 @@ const browserConfig = (params: {
   plugins: commonPlugins,
   rules: {
     ...commonRules,
+    '@stylistic/ts/member-delimiter-style': ['error', {
+      'multiline': {
+        'delimiter': 'semi',
+        'requireLast': true
+      },
+      'multilineDetection': 'brackets',
+      'singleline': {
+        'delimiter': 'semi',
+        'requireLast': false
+      },
+    }],
     'func-names': [0],
     'import-newlines/enforce': ['error', {
       forceSingleLine: false,

@@ -12,11 +12,9 @@ import {
 import eslint from '@eslint/js';
 import stylisticTsPlugin from '@stylistic/eslint-plugin-ts';
 import problems from 'eslint-config-problems';
-import importPlugin from 'eslint-plugin-import';
 import importNewlinesPlugin from 'eslint-plugin-import-newlines';
 import perfectionist from 'eslint-plugin-perfectionist';
 import promise from 'eslint-plugin-promise';
-import reactPlugin from 'eslint-plugin-react';
 import sonarjs from 'eslint-plugin-sonarjs';
 import globals from 'globals';
 import path from 'node:path';
@@ -70,7 +68,6 @@ const getAirbnbConfigs = (base?: boolean) => {
 
 const commonPlugins = {
   '@stylistic/ts': stylisticTsPlugin,
-  'import': importPlugin,
   'import-newlines': importNewlinesPlugin,
 };
 
@@ -155,10 +152,7 @@ const nodeConfig = (params: {
     },
     sourceType: 'commonjs',
   },
-  plugins: {
-    ...commonPlugins,
-    reactPlugin,
-  },
+  plugins: commonPlugins,
   rules: {
     ...commonRules,
     'import-newlines/enforce': ['error', {

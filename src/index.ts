@@ -10,6 +10,7 @@ import {
   FlatCompat,
 } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
+import stylisticTsPlugin from '@stylistic/eslint-plugin-ts';
 import problems from 'eslint-config-problems';
 import importPlugin from 'eslint-plugin-import';
 import importNewlinesPlugin from 'eslint-plugin-import-newlines';
@@ -122,6 +123,12 @@ const commonRules: Linter.RulesRecord = {
   'sonarjs/prefer-single-boolean-return': [0],
 };
 
+const commonPlugins = {
+  'import-newlines': importNewlinesPlugin,
+  importPlugin,
+  stylisticTsPlugin,
+};
+
 const nodeConfig = (params: {
   configs?: Array<{
     [arg0: string]: unknown,
@@ -149,8 +156,7 @@ const nodeConfig = (params: {
     sourceType: 'commonjs',
   },
   plugins: {
-    'import-newlines': importNewlinesPlugin,
-    importPlugin,
+    ...commonPlugins,
     reactPlugin,
   },
   rules: {
@@ -192,10 +198,7 @@ const browserConfig = (params: {
     },
     sourceType: 'commonjs',
   },
-  plugins: {
-    'import-newlines': importNewlinesPlugin,
-    importPlugin,
-  },
+  plugins: commonPlugins,
   rules: {
     ...commonRules,
     'func-names': [0],

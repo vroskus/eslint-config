@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.4.0"
+    "@types/node": "^22.4.1"
   },
   "bugs": {
     "url": "https://github.com/vroskus/eslint-config/issues"

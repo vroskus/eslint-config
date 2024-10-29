@@ -219,9 +219,7 @@ const browserConfig = (params: {
     'react/jsx-max-props-per-line': [1, {
       maximum: 1,
     }],
-    'react/jsx-sort-props': [2, {
-      reservedFirst: false,
-    }],
+    'react/jsx-sort-props': [0],
     'react/prop-types': [0],
     'react/require-default-props': [2, {
       forbidDefaultForRequired: false,

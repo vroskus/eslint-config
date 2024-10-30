@@ -72,6 +72,17 @@ const commonPlugins = {
 };
 
 const commonRules: Linter.RulesRecord = {
+  '@stylistic/ts/member-delimiter-style': ['error', {
+    'multiline': {
+      'delimiter': 'semi',
+      'requireLast': true
+    },
+    'multilineDetection': 'brackets',
+    'singleline': {
+      'delimiter': 'semi',
+      'requireLast': false
+    },
+  }],
   '@typescript-eslint/ban-ts-comment': [1],
   complexity: ['error', 4],
   curly: ['error', 'all'],
@@ -195,17 +206,6 @@ const browserConfig = (params: {
   plugins: commonPlugins,
   rules: {
     ...commonRules,
-    '@stylistic/ts/member-delimiter-style': ['error', {
-      'multiline': {
-        'delimiter': 'semi',
-        'requireLast': true
-      },
-      'multilineDetection': 'brackets',
-      'singleline': {
-        'delimiter': 'semi',
-        'requireLast': false
-      },
-    }],
     'func-names': [0],
     'import-newlines/enforce': ['error', {
       forceSingleLine: false,

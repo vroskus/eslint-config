@@ -137,13 +137,13 @@ const commonRules: Linter.RulesRecord = {
   'sonarjs/prefer-single-boolean-return': [0],
 };
 
-const nodeConfig = (params: {
+const nodeConfig = (params: void | {
   configs?: Array<{
     [arg0: string]: unknown,
     rules: Linter.RulesRecord,
   }>;
   rules?: Linter.RulesRecord;
-} | void) => typescriptEslint.config({
+}) => typescriptEslint.config({
   extends: [
     eslint.configs.recommended,
     ...getAirbnbConfigs(true),
@@ -176,13 +176,13 @@ const nodeConfig = (params: {
   },
 });
 
-const browserConfig = (params: {
+const browserConfig = (params: void | {
   configs?: Array<{
     [arg0: string]: unknown,
     rules: Linter.RulesRecord,
   }>;
   rules?: Linter.RulesRecord;
-} | void) => typescriptEslint.config({
+}) => typescriptEslint.config({
   extends: [
     eslint.configs.recommended,
     ...getAirbnbConfigs(),

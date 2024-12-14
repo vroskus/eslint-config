@@ -95,9 +95,15 @@ const commonRules: Linter.RulesRecord = {
     ],
   }],
   'no-await-in-loop': 0,
-  'no-console': 'error',
+  'no-console': ['error', {
+    allow: [
+      'error',
+      'info',
+    ],
+  }],
   'no-duplicate-imports': [0],
   'no-loss-of-precision': [0],
+  'no-magic-numbers': [2],
   'no-unreachable-loop': [0],
   'no-unused-private-class-members': [2],
   'no-useless-backreference': [0],

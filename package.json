@@ -21,29 +21,29 @@
     "build": "tsc"
   },
   "dependencies": {
-    "@eslint/compat": "^1.2.3",
+    "@eslint/compat": "^1.2.4",
     "@eslint/eslintrc": "^3.2.0",
-    "@eslint/js": "^9.16.0",
-    "@stylistic/eslint-plugin-ts": "^2.11.0",
-    "eslint": "9.14.0",
+    "@eslint/js": "^9.17.0",
+    "@stylistic/eslint-plugin-ts": "^2.12.1",
+    "eslint": "^9.17.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
     "eslint-config-problems": "^8.0.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-import-newlines": "^1.4.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-perfectionist": "^4.1.2",
+    "eslint-plugin-perfectionist": "^4.3.0",
     "eslint-plugin-promise": "^7.2.1",
     "eslint-plugin-react": "^7.37.2",
-    "eslint-plugin-react-hooks": "^5.0.0",
-    "eslint-plugin-sonarjs": "^2.0.4",
-    "globals": "^15.12.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-sonarjs": "^3.0.1",
+    "globals": "^15.13.0",
     "typescript": "^5.7.2",
-    "typescript-eslint": "^8.16.0"
+    "typescript-eslint": "^8.18.0"
   },
   "devDependencies": {
     "@types/eslint__js": "^8.42.3",
-    "@types/node": "^22.10.1"
+    "@types/node": "^22.10.2"
   },
   "bugs": {
     "url": "https://github.com/vroskus/eslint-config/issues"

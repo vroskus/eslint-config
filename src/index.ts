@@ -66,6 +66,16 @@ const getAirbnbConfigs = (base?: boolean) => {
   ];
 }
 
+const commonExtends = [
+  eslint.configs.recommended,
+  {
+    rules: problems.rules,
+  },
+  perfectionist.configs['recommended-natural'],
+  sonarjs.configs.recommended,
+  promise.configs['flat/recommended'],
+];
+
 const commonPlugins = {
   '@stylistic/ts': stylisticTsPlugin,
   'import-newlines': importNewlinesPlugin,
@@ -84,6 +94,7 @@ const commonRules: Linter.RulesRecord = {
     },
   }],
   '@typescript-eslint/ban-ts-comment': [1],
+  camelcase: ['error'],
   complexity: ['error', 4],
   curly: ['error', 'all'],
   'function-call-argument-newline': ['error', 'always'],
@@ -136,6 +147,7 @@ const commonRules: Linter.RulesRecord = {
   'perfectionist/sort-classes': [0],
   'perfectionist/sort-exports': [0],
   'perfectionist/sort-imports': [0],
+  'promise/always-return': [0],
   'sonarjs/no-duplicate-string': ['error', {
     threshold: 5,
   }],
@@ -151,13 +163,8 @@ const nodeConfig = (params: void | {
   rules?: Linter.RulesRecord;
 }) => typescriptEslint.config({
   extends: [
-    eslint.configs.recommended,
+    ...commonExtends,
     ...getAirbnbConfigs(true),
-    {
-      rules: problems.rules,
-    },
-    perfectionist.configs['recommended-natural'],
-    sonarjs.configs.recommended,
     ...typescriptEslint.configs.recommended,
     ...(params?.configs || []),
   ],
@@ -190,14 +197,8 @@ const browserConfig = (params: void | {
   rules?: Linter.RulesRecord;
 }) => typescriptEslint.config({
   extends: [
-    eslint.configs.recommended,
+    ...commonExtends,
     ...getAirbnbConfigs(),
-    {
-      rules: problems.rules,
-    },
-    perfectionist.configs['recommended-natural'],
-    promise.configs['flat/recommended'],
-    sonarjs.configs.recommended,
     ...typescriptEslint.configs.recommended,
     ...(params?.configs || []),
   ],
@@ -220,7 +221,6 @@ const browserConfig = (params: void | {
     'jsx-a11y/control-has-associated-label': [1],
     'jsx-a11y/href-no-hash': [0],
     'jsx-a11y/label-has-associated-control': [1],
-    'promise/always-return': [0],
     'react/jsx-curly-brace-presence': [2, 'always'],
     'react/jsx-max-props-per-line': [1, {
       maximum: 1,

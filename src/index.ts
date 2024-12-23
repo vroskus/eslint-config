@@ -152,6 +152,7 @@ const commonRules: Linter.RulesRecord = {
     threshold: 5,
   }],
   'sonarjs/no-small-switch': [0],
+  'sonarjs/no-unused-vars': [1], // Some strange misbehavior on 'export const'
   'sonarjs/prefer-single-boolean-return': [0],
 };
 

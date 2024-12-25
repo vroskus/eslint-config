@@ -147,6 +147,7 @@ const commonRules: Linter.RulesRecord = {
   'perfectionist/sort-classes': [0],
   'perfectionist/sort-exports': [0],
   'perfectionist/sort-imports': [0],
+  'perfectionist/sort-modules': [0], // A very good rule but breaks no-use-before-define
   'promise/always-return': [0],
   'sonarjs/no-duplicate-string': ['error', {
     threshold: 5,

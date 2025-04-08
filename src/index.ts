@@ -41,6 +41,9 @@ const getAirbnbConfigs = (base?: boolean) => {
   const airbnbBaseConfig = compat.extends(`airbnb${baseSubpath}`);
   const airbnbTypescriptConfig = compat.extends(`airbnb-typescript${baseSubpath}`);
   
+  // @ts-expect-error plugins has to be reset
+  airbnbTypescriptConfig[0].plugins = [];
+  
   const currentAirbnbRules = airbnbTypescriptConfig[0].rules;
   const airbnbTypescriptConfigRules = {
   };

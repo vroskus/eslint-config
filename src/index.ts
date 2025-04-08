@@ -41,20 +41,20 @@ const getAirbnbConfigs = (base?: boolean) => {
   const airbnbBaseConfig = compat.extends(`airbnb${baseSubpath}`);
   const airbnbTypescriptConfig = compat.extends(`airbnb-typescript${baseSubpath}`);
   
-  airbnbTypescriptConfig[0].plugins = [];
-  
   const currentAirbnbRules = airbnbTypescriptConfig[0].rules;
   const airbnbTypescriptConfigRules = {
   };
   
-  Object.keys(currentAirbnbRules).forEach((key) => {
-    if (key.includes('@typescript-eslint/') === false) {
-      const value = currentAirbnbRules[key];
-      const tsValue = currentAirbnbRules[`@typescript-eslint/${key}`];
-  
-      airbnbTypescriptConfigRules[key] = tsValue || value;
-    }
-  });
+  if (currentAirbnbRules) {
+    Object.keys(currentAirbnbRules).forEach((key) => {
+      if (key.includes('@typescript-eslint/') === false) {
+        const value = currentAirbnbRules[key];
+        const tsValue = currentAirbnbRules[`@typescript-eslint/${key}`];
+    
+        airbnbTypescriptConfigRules[key] = tsValue || value;
+      }
+    });
+  }
   
   airbnbTypescriptConfigRules['comma-dangle'] = ['error', 'always-multiline'];
   
@@ -149,11 +149,14 @@ const commonRules: Linter.RulesRecord = {
   'perfectionist/sort-imports': [0],
   'perfectionist/sort-modules': [0], // A very good rule but breaks no-use-before-define
   'promise/always-return': [0],
+  'sonarjs/no-built-in-override': [2],
+  'sonarjs/no-collapsible-if': [2],
   'sonarjs/no-duplicate-string': ['error', {
     threshold: 5,
   }],
   'sonarjs/no-small-switch': [0],
   'sonarjs/no-unused-vars': [1], // Some strange misbehavior on 'export const'
+  'sonarjs/prefer-object-literal': [2],
   'sonarjs/prefer-single-boolean-return': [0],
   'sonarjs/redundant-type-aliases': [0], // Removes types that are explanatory purpose
 };

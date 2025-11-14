@@ -1,8 +1,10 @@
-// Types
+// Global Types
 import type {
+  ESLint,
   Linter,
-} from "eslint";
+} from 'eslint';
 
+// Helpers
 import {
   fixupConfigRules,
 } from '@eslint/compat';
@@ -22,6 +24,17 @@ import {
   fileURLToPath,
 } from 'node:url';
 import typescriptEslint from 'typescript-eslint';
+
+// Types
+type $ConfigParams = {
+  configs?: Array<{
+    [arg0: string]: unknown,
+    rules: Linter.RulesRecord,
+  }>;
+  languageOptions?: Linter.LanguageOptions;
+  plugins?: Record<string, ESLint.Plugin>;
+  rules?: Linter.RulesRecord;
+};
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
@@ -79,7 +92,7 @@ const commonExtends = [
   promise.configs['flat/recommended'],
 ];
 
-const commonPlugins = {
+const commonPlugins: Record<string, ESLint.Plugin> = {
   '@stylistic/ts': stylisticTsPlugin,
   'import-newlines': importNewlinesPlugin,
 };
@@ -164,13 +177,7 @@ const commonRules: Linter.RulesRecord = {
   'sonarjs/redundant-type-aliases': [0], // Removes types that are explanatory purpose
 };
 
-const nodeConfig = (params: void | {
-  configs?: Array<{
-    [arg0: string]: unknown,
-    rules: Linter.RulesRecord,
-  }>;
-  rules?: Linter.RulesRecord;
-}) => typescriptEslint.config({
+const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
   extends: [
     ...commonExtends,
     ...getAirbnbConfigs(true),
@@ -183,9 +190,16 @@ const nodeConfig = (params: void | {
       ...globals.node,
       ...globals.jest,
     },
+    parserOptions: {
+      tsconfigRootDir: import.meta.dirname,
+    },
     sourceType: 'commonjs',
+    ...(params?.languageOptions || {}),
   },
-  plugins: commonPlugins,
+  plugins: {
+    ...commonPlugins,
+    ...(params?.plugins || {}),
+  },
   rules: {
     ...commonRules,
     'import-newlines/enforce': ['error', {
@@ -198,13 +212,7 @@ const nodeConfig = (params: void | {
   },
 });
 
-const browserConfig = (params: void | {
-  configs?: Array<{
-    [arg0: string]: unknown,
-    rules: Linter.RulesRecord,
-  }>;
-  rules?: Linter.RulesRecord;
-}) => typescriptEslint.config({
+const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config({
   extends: [
     ...commonExtends,
     ...getAirbnbConfigs(),
@@ -218,8 +226,12 @@ const browserConfig = (params: void | {
       ...globals.jest,
     },
     sourceType: 'commonjs',
+    ...(params?.languageOptions || {}),
   },
-  plugins: commonPlugins,
+  plugins: {
+    ...commonPlugins,
+    ...(params?.plugins || {}),
+  },
   rules: {
     ...commonRules,
     'func-names': [0],

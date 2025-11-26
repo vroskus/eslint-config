@@ -97,6 +97,14 @@ const commonPlugins: Record<string, ESLint.Plugin> = {
   'import-newlines': importNewlinesPlugin,
 };
 
+const commonLanguageOptions: Linter.LanguageOptions = {
+    ecmaVersion: 'latest',
+    parserOptions: {
+      tsconfigRootDir: import.meta.dirname,
+    },
+    sourceType: 'commonjs',
+};
+
 const commonRules: Linter.RulesRecord = {
   '@stylistic/ts/member-delimiter-style': ['error', {
     'multiline': {
@@ -185,15 +193,11 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
     ...(params?.configs || []),
   ],
   languageOptions: {
-    ecmaVersion: 'latest',
+    ...commonLanguageOptions,
     globals: {
       ...globals.node,
       ...globals.jest,
     },
-    parserOptions: {
-      tsconfigRootDir: import.meta.dirname,
-    },
-    sourceType: 'commonjs',
     ...(params?.languageOptions || {}),
   },
   plugins: {
@@ -220,12 +224,11 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
     ...(params?.configs || []),
   ],
   languageOptions: {
-    ecmaVersion: 'latest',
+    ...commonLanguageOptions,
     globals: {
       ...globals.browser,
       ...globals.jest,
     },
-    sourceType: 'commonjs',
     ...(params?.languageOptions || {}),
   },
   plugins: {

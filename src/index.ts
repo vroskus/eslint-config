@@ -28,8 +28,8 @@ import typescriptEslint from 'typescript-eslint';
 // Types
 type $ConfigParams = {
   configs?: Array<{
-    [arg0: string]: unknown,
-    rules: Linter.RulesRecord,
+    [arg0: string]: unknown;
+    rules: Linter.RulesRecord;
   }>;
   languageOptions?: Linter.LanguageOptions;
   plugins?: Record<string, ESLint.Plugin>;
@@ -48,39 +48,39 @@ const getAirbnbConfigs = (base?: boolean) => {
   let baseSubpath = '';
 
   if (base === true) {
-    baseSubpath = '/base'
+    baseSubpath = '/base';
   }
 
   const airbnbBaseConfig = compat.extends(`airbnb${baseSubpath}`);
   const airbnbTypescriptConfig = compat.extends(`airbnb-typescript${baseSubpath}`);
-  
+
   // @ts-expect-error plugins has to be reset
   airbnbTypescriptConfig[0].plugins = [];
-  
+
   const currentAirbnbRules = airbnbTypescriptConfig[0].rules;
   const airbnbTypescriptConfigRules = {
   };
-  
+
   if (currentAirbnbRules) {
     Object.keys(currentAirbnbRules).forEach((key) => {
       if (key.includes('@typescript-eslint/') === false) {
         const value = currentAirbnbRules[key];
         const tsValue = currentAirbnbRules[`@typescript-eslint/${key}`];
-    
+
         airbnbTypescriptConfigRules[key] = tsValue || value;
       }
     });
   }
-  
+
   airbnbTypescriptConfigRules['comma-dangle'] = ['error', 'always-multiline'];
-  
+
   airbnbTypescriptConfig[0].rules = airbnbTypescriptConfigRules;
 
   return [
     ...fixupConfigRules(airbnbBaseConfig),
     ...fixupConfigRules(airbnbTypescriptConfig),
   ];
-}
+};
 
 const commonExtends = [
   eslint.configs.recommended,
@@ -98,23 +98,23 @@ const commonPlugins: Record<string, ESLint.Plugin> = {
 };
 
 const commonLanguageOptions: Linter.LanguageOptions = {
-    ecmaVersion: 'latest',
-    parserOptions: {
-      tsconfigRootDir: import.meta.dirname,
-    },
-    sourceType: 'commonjs',
+  ecmaVersion: 'latest',
+  parserOptions: {
+    tsconfigRootDir: import.meta.dirname,
+  },
+  sourceType: 'commonjs',
 };
 
 const commonRules: Linter.RulesRecord = {
   '@stylistic/ts/member-delimiter-style': ['error', {
-    'multiline': {
-      'delimiter': 'semi',
-      'requireLast': true
+    multiline: {
+      delimiter: 'semi',
+      requireLast: true,
     },
-    'multilineDetection': 'brackets',
-    'singleline': {
-      'delimiter': 'semi',
-      'requireLast': false
+    multilineDetection: 'brackets',
+    singleline: {
+      delimiter: 'semi',
+      requireLast: false,
     },
   }],
   '@typescript-eslint/ban-ts-comment': [1],
@@ -198,11 +198,13 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
       ...globals.node,
       ...globals.jest,
     },
-    ...(params?.languageOptions || {}),
+    ...(params?.languageOptions || {
+    }),
   },
   plugins: {
     ...commonPlugins,
-    ...(params?.plugins || {}),
+    ...(params?.plugins || {
+    }),
   },
   rules: {
     ...commonRules,
@@ -212,7 +214,8 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
     }],
     'no-restricted-syntax': 0,
     strict: [0],
-    ...(params?.rules || {}),
+    ...(params?.rules || {
+    }),
   },
 });
 
@@ -229,11 +232,13 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
       ...globals.browser,
       ...globals.jest,
     },
-    ...(params?.languageOptions || {}),
+    ...(params?.languageOptions || {
+    }),
   },
   plugins: {
     ...commonPlugins,
-    ...(params?.plugins || {}),
+    ...(params?.plugins || {
+    }),
   },
   rules: {
     ...commonRules,
@@ -260,7 +265,8 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
       defaultProps: 'static public field',
       displayName: 'static public field',
     }],
-    ...(params?.rules || {}),
+    ...(params?.rules || {
+    }),
   },
 });
 

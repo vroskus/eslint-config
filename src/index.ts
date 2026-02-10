@@ -12,7 +12,7 @@ import {
   FlatCompat,
 } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
-import stylisticTsPlugin from '@stylistic/eslint-plugin-ts';
+import stylisticPlugin from '@stylistic/eslint-plugin';
 import problems from 'eslint-config-problems';
 import importNewlinesPlugin from 'eslint-plugin-import-newlines';
 import perfectionist from 'eslint-plugin-perfectionist';
@@ -88,12 +88,12 @@ const commonExtends = [
     rules: problems.rules,
   },
   perfectionist.configs['recommended-natural'],
-  sonarjs.configs.recommended,
+  sonarjs.configs?.recommended,
   promise.configs['flat/recommended'],
 ];
 
 const commonPlugins: Record<string, ESLint.Plugin> = {
-  '@stylistic/ts': stylisticTsPlugin,
+  '@stylistic/ts': stylisticPlugin,
   'import-newlines': importNewlinesPlugin,
 };
 
@@ -122,6 +122,10 @@ const commonRules: Linter.RulesRecord = {
   complexity: ['error', 4],
   curly: ['error', 'all'],
   'function-call-argument-newline': ['error', 'always'],
+  'import-newlines/enforce': ['error', {
+    forceSingleLine: false,
+    items: 1,
+  }],
   'import/no-cycle': [0],
   'import/no-extraneous-dependencies': ['error', {
     devDependencies: [
@@ -208,10 +212,6 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
   },
   rules: {
     ...commonRules,
-    'import-newlines/enforce': ['error', {
-      forceSingleLine: false,
-      items: 1,
-    }],
     'no-restricted-syntax': 0,
     strict: [0],
     ...(params?.rules || {
@@ -243,10 +243,6 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
   rules: {
     ...commonRules,
     'func-names': [0],
-    'import-newlines/enforce': ['error', {
-      forceSingleLine: false,
-      items: 1,
-    }],
     'jsx-a11y/control-has-associated-label': [1],
     'jsx-a11y/href-no-hash': [0],
     'jsx-a11y/label-has-associated-control': [1],

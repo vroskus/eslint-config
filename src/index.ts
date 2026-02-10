@@ -55,7 +55,8 @@ const getAirbnbConfigs = (base?: boolean) => {
   const airbnbTypescriptConfig = compat.extends(`airbnb-typescript${baseSubpath}`);
 
   // @ts-expect-error plugins has to be reset
-  airbnbTypescriptConfig[0].plugins = [];
+  airbnbTypescriptConfig[0].plugins = [
+  ];
 
   const currentAirbnbRules = airbnbTypescriptConfig[0].rules;
   const airbnbTypescriptConfigRules = {
@@ -72,7 +73,10 @@ const getAirbnbConfigs = (base?: boolean) => {
     });
   }
 
-  airbnbTypescriptConfigRules['comma-dangle'] = ['error', 'always-multiline'];
+  airbnbTypescriptConfigRules['comma-dangle'] = [
+    'error',
+    'always-multiline',
+  ];
 
   airbnbTypescriptConfig[0].rules = airbnbTypescriptConfigRules;
 
@@ -93,7 +97,7 @@ const commonExtends = [
 ];
 
 const commonPlugins: Record<string, ESLint.Plugin> = {
-  '@stylistic/ts': stylisticPlugin,
+  '@stylistic': stylisticPlugin,
   'module-bindings-newline': bindingsNewlinePlugin as ESLint.Plugin,
 };
 
@@ -106,85 +110,203 @@ const commonLanguageOptions: Linter.LanguageOptions = {
 };
 
 const commonRules: Linter.RulesRecord = {
-  '@stylistic/ts/member-delimiter-style': ['error', {
-    multiline: {
-      delimiter: 'semi',
-      requireLast: true,
+  '@stylistic/array-bracket-newline': [
+    'error',
+    'always',
+  ],
+  '@stylistic/array-element-newline': [
+    'error',
+    'always',
+  ],
+  '@stylistic/curly-newline': [
+    'error',
+    'always',
+  ],
+  '@stylistic/function-call-argument-newline': [
+    'error',
+    'always',
+  ],
+  '@stylistic/function-call-spacing': [
+    'error',
+    'never',
+  ],
+  '@stylistic/jsx-newline': [
+    'error',
+    {
+      prevent: false,
     },
-    multilineDetection: 'brackets',
-    singleline: {
-      delimiter: 'semi',
-      requireLast: false,
+  ],
+  '@stylistic/member-delimiter-style': [
+    'error',
+    {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      multilineDetection: 'brackets',
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
     },
-  }],
-  '@typescript-eslint/ban-ts-comment': [1],
-  camelcase: ['error'],
-  complexity: ['error', 4],
-  curly: ['error', 'all'],
-  'function-call-argument-newline': ['error', 'always'],
-  'import/no-cycle': [0],
-  'import/no-extraneous-dependencies': ['error', {
-    devDependencies: [
-      '**/eslint.config.*',
-      'test/**',
-    ],
-  }],
-  'module-bindings-newline/export': ['error'],
-  'module-bindings-newline/import': ['error'],
+  ],
+  '@typescript-eslint/ban-ts-comment': [
+    1,
+  ],
+  camelcase: [
+    'error',
+  ],
+  complexity: [
+    'error',
+    4,
+  ],
+  curly: [
+    'error',
+    'all',
+  ],
+  'function-call-argument-newline': [
+    'error',
+    'always',
+  ],
+  'import/no-cycle': [
+    0,
+  ],
+  'import/no-extraneous-dependencies': [
+    'error',
+    {
+      devDependencies: [
+        '**/eslint.config.*',
+        'test/**',
+      ],
+    },
+  ],
+  'module-bindings-newline/export': [
+    'error',
+  ],
+  'module-bindings-newline/import': [
+    'error',
+  ],
   'no-await-in-loop': 0,
-  'no-console': ['error', {
-    allow: [
-      'error',
-      'info',
-    ],
-  }],
-  'no-duplicate-imports': [0],
-  'no-loss-of-precision': [0],
-  'no-magic-numbers': [2],
-  'no-unreachable-loop': [0],
-  'no-unused-private-class-members': [2],
-  'no-useless-backreference': [0],
-  'object-curly-newline': ['error', {
-    ExportDeclaration: 'always',
-    ImportDeclaration: 'always',
-    ObjectExpression: 'always',
-    ObjectPattern: 'always',
-  }],
-  'object-property-newline': ['error', {
-    allowMultiplePropertiesPerLine: false,
-  }],
-  'padding-line-between-statements': ['error', {
-    blankLine: 'always',
-    next: '*',
-    prev: ['const', 'let'],
-  }, {
-    blankLine: 'any',
-    next: ['const', 'let'],
-    prev: ['const', 'let'],
-  }, {
-    blankLine: 'always',
-    next: '*',
-    prev: ['if', 'function', 'for'],
-  }, {
-    blankLine: 'always',
-    next: 'return',
-    prev: '*',
-  }],
-  'perfectionist/sort-classes': [0],
-  'perfectionist/sort-exports': [0],
-  'perfectionist/sort-imports': [0],
-  'perfectionist/sort-modules': [0], // A very good rule but breaks no-use-before-define
-  'promise/always-return': [0],
-  'sonarjs/no-built-in-override': [2],
-  'sonarjs/no-collapsible-if': [2],
-  'sonarjs/no-duplicate-string': ['error', {
-    threshold: 5,
-  }],
-  'sonarjs/no-small-switch': [0],
-  'sonarjs/no-unused-vars': [0], // Some strange misbehavior on 'export const'
-  'sonarjs/prefer-object-literal': [2],
-  'sonarjs/prefer-single-boolean-return': [0],
-  'sonarjs/redundant-type-aliases': [0], // Removes types that are explanatory purpose
+  'no-console': [
+    'error',
+    {
+      allow: [
+        'error',
+        'info',
+      ],
+    },
+  ],
+  'no-duplicate-imports': [
+    0,
+  ],
+  'no-loss-of-precision': [
+    0,
+  ],
+  'no-magic-numbers': [
+    2,
+  ],
+  'no-unreachable-loop': [
+    0,
+  ],
+  'no-unused-private-class-members': [
+    2,
+  ],
+  'no-useless-backreference': [
+    0,
+  ],
+  'object-curly-newline': [
+    'error',
+    {
+      ExportDeclaration: 'always',
+      ImportDeclaration: 'always',
+      ObjectExpression: 'always',
+      ObjectPattern: 'always',
+    },
+  ],
+  'object-property-newline': [
+    'error',
+    {
+      allowMultiplePropertiesPerLine: false,
+    },
+  ],
+  'padding-line-between-statements': [
+    'error',
+    {
+      blankLine: 'always',
+      next: '*',
+      prev: [
+        'const',
+        'let',
+      ],
+    },
+    {
+      blankLine: 'any',
+      next: [
+        'const',
+        'let',
+      ],
+      prev: [
+        'const',
+        'let',
+      ],
+    },
+    {
+      blankLine: 'always',
+      next: '*',
+      prev: [
+        'if',
+        'function',
+        'for',
+      ],
+    },
+    {
+      blankLine: 'always',
+      next: 'return',
+      prev: '*',
+    },
+  ],
+  'perfectionist/sort-classes': [
+    0,
+  ],
+  'perfectionist/sort-exports': [
+    0,
+  ],
+  'perfectionist/sort-imports': [
+    0,
+  ],
+  'perfectionist/sort-modules': [
+    0,
+  ], // A very good rule but breaks no-use-before-define
+  'promise/always-return': [
+    0,
+  ],
+  'sonarjs/no-built-in-override': [
+    2,
+  ],
+  'sonarjs/no-collapsible-if': [
+    2,
+  ],
+  'sonarjs/no-duplicate-string': [
+    'error',
+    {
+      threshold: 5,
+    },
+  ],
+  'sonarjs/no-small-switch': [
+    0,
+  ],
+  'sonarjs/no-unused-vars': [
+    0,
+  ], // Some strange misbehavior on 'export const'
+  'sonarjs/prefer-object-literal': [
+    2,
+  ],
+  'sonarjs/prefer-single-boolean-return': [
+    0,
+  ],
+  'sonarjs/redundant-type-aliases': [
+    0,
+  ], // Removes types that are explanatory purpose
 };
 
 const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
@@ -192,7 +314,8 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
     ...commonExtends,
     ...getAirbnbConfigs(true),
     ...typescriptEslint.configs.recommended,
-    ...(params?.configs || []),
+    ...(params?.configs || [
+    ]),
   ],
   languageOptions: {
     ...commonLanguageOptions,
@@ -211,7 +334,9 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
   rules: {
     ...commonRules,
     'no-restricted-syntax': 0,
-    strict: [0],
+    strict: [
+      0,
+    ],
     ...(params?.rules || {
     }),
   },
@@ -222,7 +347,8 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
     ...commonExtends,
     ...getAirbnbConfigs(),
     ...typescriptEslint.configs.recommended,
-    ...(params?.configs || []),
+    ...(params?.configs || [
+    ]),
   ],
   languageOptions: {
     ...commonLanguageOptions,
@@ -240,25 +366,50 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
   },
   rules: {
     ...commonRules,
-    'func-names': [0],
-    'jsx-a11y/control-has-associated-label': [1],
-    'jsx-a11y/href-no-hash': [0],
-    'jsx-a11y/label-has-associated-control': [1],
-    'react/jsx-curly-brace-presence': [2, 'always'],
-    'react/jsx-max-props-per-line': [1, {
-      maximum: 1,
-    }],
-    'react/jsx-sort-props': [0],
-    'react/prop-types': [0],
-    'react/require-default-props': [2, {
-      forbidDefaultForRequired: false,
-    }],
-    'react/static-property-placement': [2, 'property assignment', {
-      contextType: 'static public field',
-      contextTypes: 'static public field',
-      defaultProps: 'static public field',
-      displayName: 'static public field',
-    }],
+    'func-names': [
+      0,
+    ],
+    'jsx-a11y/control-has-associated-label': [
+      1,
+    ],
+    'jsx-a11y/href-no-hash': [
+      0,
+    ],
+    'jsx-a11y/label-has-associated-control': [
+      1,
+    ],
+    'react/jsx-curly-brace-presence': [
+      2,
+      'always',
+    ],
+    'react/jsx-max-props-per-line': [
+      1,
+      {
+        maximum: 1,
+      },
+    ],
+    'react/jsx-sort-props': [
+      0,
+    ],
+    'react/prop-types': [
+      0,
+    ],
+    'react/require-default-props': [
+      2,
+      {
+        forbidDefaultForRequired: false,
+      },
+    ],
+    'react/static-property-placement': [
+      2,
+      'property assignment',
+      {
+        contextType: 'static public field',
+        contextTypes: 'static public field',
+        defaultProps: 'static public field',
+        displayName: 'static public field',
+      },
+    ],
     ...(params?.rules || {
     }),
   },

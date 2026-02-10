@@ -13,9 +13,9 @@ import {
 } from '@eslint/eslintrc';
 import eslint from '@eslint/js';
 import stylisticPlugin from '@stylistic/eslint-plugin';
-import problems from 'eslint-config-problems';
-import importNewlinesPlugin from 'eslint-plugin-import-newlines';
+import bindingsNewlinePlugin from 'eslint-plugin-module-bindings-newline';
 import perfectionist from 'eslint-plugin-perfectionist';
+import problems from 'eslint-config-problems';
 import promise from 'eslint-plugin-promise';
 import sonarjs from 'eslint-plugin-sonarjs';
 import globals from 'globals';
@@ -94,7 +94,7 @@ const commonExtends = [
 
 const commonPlugins: Record<string, ESLint.Plugin> = {
   '@stylistic/ts': stylisticPlugin,
-  'import-newlines': importNewlinesPlugin,
+  'module-bindings-newline': bindingsNewlinePlugin as ESLint.Plugin,
 };
 
 const commonLanguageOptions: Linter.LanguageOptions = {
@@ -122,10 +122,6 @@ const commonRules: Linter.RulesRecord = {
   complexity: ['error', 4],
   curly: ['error', 'all'],
   'function-call-argument-newline': ['error', 'always'],
-  'import-newlines/enforce': ['error', {
-    forceSingleLine: false,
-    items: 1,
-  }],
   'import/no-cycle': [0],
   'import/no-extraneous-dependencies': ['error', {
     devDependencies: [
@@ -133,6 +129,8 @@ const commonRules: Linter.RulesRecord = {
       'test/**',
     ],
   }],
+  'module-bindings-newline/export': ['error'],
+  'module-bindings-newline/import': ['error'],
   'no-await-in-loop': 0,
   'no-console': ['error', {
     allow: [

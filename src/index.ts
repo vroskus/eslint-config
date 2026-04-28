@@ -36,6 +36,11 @@ type $ConfigParams = {
   rules?: Linter.RulesRecord;
 };
 
+// Rule state
+const off = 0;
+const warning = 1;
+const error = 2;
+
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 const compat = new FlatCompat({
@@ -151,7 +156,7 @@ const commonRules: Linter.RulesRecord = {
     },
   ],
   '@typescript-eslint/ban-ts-comment': [
-    1,
+    warning,
   ],
   camelcase: [
     'error',
@@ -169,7 +174,7 @@ const commonRules: Linter.RulesRecord = {
     'always',
   ],
   'import/no-cycle': [
-    0,
+    off,
   ],
   'import/no-extraneous-dependencies': [
     'error',
@@ -186,7 +191,7 @@ const commonRules: Linter.RulesRecord = {
   'module-bindings-newline/import': [
     'error',
   ],
-  'no-await-in-loop': 0,
+  'no-await-in-loop': off,
   'no-console': [
     'error',
     {
@@ -197,22 +202,22 @@ const commonRules: Linter.RulesRecord = {
     },
   ],
   'no-duplicate-imports': [
-    0,
+    off,
   ],
   'no-loss-of-precision': [
-    0,
+    off,
   ],
   'no-magic-numbers': [
-    2,
+    error,
   ],
   'no-unreachable-loop': [
-    0,
+    off,
   ],
   'no-unused-private-class-members': [
-    2,
+    error,
   ],
   'no-useless-backreference': [
-    0,
+    off,
   ],
   'object-curly-newline': [
     'error',
@@ -266,25 +271,25 @@ const commonRules: Linter.RulesRecord = {
     },
   ],
   'perfectionist/sort-classes': [
-    0,
+    off,
   ],
   'perfectionist/sort-exports': [
-    0,
+    off,
   ],
   'perfectionist/sort-imports': [
-    0,
+    off,
   ],
   'perfectionist/sort-modules': [
-    0,
+    off,
   ], // A very good rule but breaks no-use-before-define
   'promise/always-return': [
-    0,
+    off,
   ],
   'sonarjs/no-built-in-override': [
-    2,
+    error,
   ],
   'sonarjs/no-collapsible-if': [
-    2,
+    error,
   ],
   'sonarjs/no-duplicate-string': [
     'error',
@@ -293,19 +298,19 @@ const commonRules: Linter.RulesRecord = {
     },
   ],
   'sonarjs/no-small-switch': [
-    0,
+    off,
   ],
   'sonarjs/no-unused-vars': [
-    0,
+    off,
   ], // Some strange misbehavior on 'export const'
   'sonarjs/prefer-object-literal': [
-    2,
+    error,
   ],
   'sonarjs/prefer-single-boolean-return': [
-    0,
+    off,
   ],
   'sonarjs/redundant-type-aliases': [
-    0,
+    off,
   ], // Removes types that are explanatory purpose
 };
 
@@ -333,9 +338,9 @@ const nodeConfig = (params: $ConfigParams | void) => typescriptEslint.config({
   },
   rules: {
     ...commonRules,
-    'no-restricted-syntax': 0,
+    'no-restricted-syntax': off,
     strict: [
-      0,
+      off,
     ],
     ...(params?.rules || {
     }),
@@ -367,41 +372,52 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
   rules: {
     ...commonRules,
     'func-names': [
-      0,
+      off,
     ],
     'jsx-a11y/control-has-associated-label': [
-      1,
+      warning,
     ],
     'jsx-a11y/href-no-hash': [
-      0,
+      off,
     ],
     'jsx-a11y/label-has-associated-control': [
-      1,
+      warning,
+    ],
+    'react/boolean-prop-naming': [
+      warning,
+    ],
+    'react/display-name': [
+      error,
+      'always',
     ],
     'react/jsx-curly-brace-presence': [
-      2,
+      error,
       'always',
     ],
     'react/jsx-max-props-per-line': [
-      1,
+      warning,
       {
         maximum: 1,
       },
     ],
     'react/jsx-sort-props': [
-      0,
+      off,
+    ],
+    'react/no-multi-comp': [
+      error,
+      'always',
     ],
     'react/prop-types': [
-      0,
+      off,
     ],
     'react/require-default-props': [
-      2,
+      error,
       {
         forbidDefaultForRequired: false,
       },
     ],
     'react/static-property-placement': [
-      2,
+      error,
       'property assignment',
       {
         contextType: 'static public field',

@@ -385,10 +385,12 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
     ],
     'react/boolean-prop-naming': [
       warning,
+      {
+        rule: '^(is|has)[A-Z]([A-Za-z0-9]?)+',
+      },
     ],
     'react/display-name': [
       error,
-      'always',
     ],
     'react/jsx-curly-brace-presence': [
       error,
@@ -405,7 +407,6 @@ const browserConfig = (params: $ConfigParams | void) => typescriptEslint.config(
     ],
     'react/no-multi-comp': [
       error,
-      'always',
     ],
     'react/prop-types': [
       off,
